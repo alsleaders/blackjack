@@ -17,6 +17,7 @@ const faces = [
 
 let cardDeck = []
 let playerDeck = []
+let computerDeck = []
 
 const createDeck = () => {
   for (let i = 0; i < suits.length; i++) {
@@ -64,11 +65,27 @@ const dealCard = () => {
     firstCard.value
   console.log('does this do anything?' + { firstCard })
 }
+
+const dealComputer = () => {
+  const firstCard = cardDeck[0]
+  console.log(firstCard)
+  const takeCard = cardDeck.pop()
+  computerDeck.push(takeCard)
+  document.querySelector('.output').textContent =
+    firstCard.rank +
+    ' of ' +
+    firstCard.suit +
+    ' has a value of ' +
+    firstCard.value
+  console.log('this card ' + { firstCard } + ' was dealt to the computer')
+}
 const main = () => {
   createDeck()
   shuffle()
   dealCard()
   dealCard()
+  dealComputer()
+  dealComputer()
   if (document.querySelector('h1.hello-world')) {
     document.querySelector('h1.hello-world').textContent = 'Blackjack!'
   }
