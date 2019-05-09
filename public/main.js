@@ -16,13 +16,7 @@ const faces = [
 ]
 
 let cardDeck = []
-// let shownDeck = []
-
-const main = () => {
-  if (document.querySelector('h1.hello-world')) {
-    document.querySelector('h1.hello-world').textContent = 'Blackjack!'
-  }
-}
+let playerDeck = []
 
 const createDeck = () => {
   for (let i = 0; i < suits.length; i++) {
@@ -60,6 +54,8 @@ const shuffle = () => {
 const dealCard = () => {
   const firstCard = cardDeck[0]
   console.log(firstCard)
+  const takeCard = cardDeck.pop()
+  playerDeck.push(takeCard)
   document.querySelector('.output').textContent =
     firstCard.rank +
     ' of ' +
@@ -68,8 +64,17 @@ const dealCard = () => {
     firstCard.value
   console.log('does this do anything?' + { firstCard })
 }
+const main = () => {
+  createDeck()
+  shuffle()
+  dealCard()
+  dealCard()
+  if (document.querySelector('h1.hello-world')) {
+    document.querySelector('h1.hello-world').textContent = 'Blackjack!'
+  }
+}
 
 document.addEventListener('DOMContentLoaded', main)
-document.addEventListener('DOMContentLoaded', createDeck)
-document.addEventListener('DOMContentLoaded', shuffle)
+// document.addEventListener('DOMContentLoaded', createDeck)
+// document.addEventListener('DOMContentLoaded', shuffle)
 document.querySelector('.hit').addEventListener('click', dealCard)
