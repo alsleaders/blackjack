@@ -52,7 +52,54 @@ const shuffle = () => {
   console.log('All cards shuffled')
 }
 
-const dealCard = () => {
+const dealTwoCards = () => {
+  for (let i = 0; i < 2; i++) {
+    const firstCard = cardDeck[0]
+    console.log(firstCard)
+    const takeCard = cardDeck.pop()
+    playerDeck.push(takeCard)
+    document.querySelector('.output').textContent =
+      firstCard.rank +
+      ' of ' +
+      firstCard.suit +
+      ' has a value of ' +
+      firstCard.value +
+      ' some text that proves this ended'
+
+    const listItem = document.createElement('p')
+    listItem.textContent = { firstCard }
+    console.log(listItem)
+    document.querySelector('.output').appendChild(listItem)
+    console.log('does this do anything?' + { firstCard })
+  }
+}
+
+const dealComputerTwoCards = () => {
+  for (let i = 0; i < 2; i++) {
+    const firstCard = cardDeck[0]
+    console.log(firstCard)
+    const takeCard = cardDeck.pop()
+    computerDeck.push(takeCard)
+    // document.querySelector('.output').textContent =
+    //   firstCard.rank +
+    //   ' of ' +
+    //   firstCard.suit +
+    //   ' has a value of ' +
+    //   firstCard.value
+    console.log('this card ' + { firstCard } + ' was dealt to the computer')
+  }
+}
+const main = () => {
+  createDeck()
+  shuffle()
+  dealTwoCards()
+  dealComputerTwoCards()
+  if (document.querySelector('h1.hello-world')) {
+    document.querySelector('h1.hello-world').textContent = 'Blackjack!'
+  }
+}
+
+const hitCard = () => {
   const firstCard = cardDeck[0]
   console.log(firstCard)
   const takeCard = cardDeck.pop()
@@ -63,35 +110,13 @@ const dealCard = () => {
     firstCard.suit +
     ' has a value of ' +
     firstCard.value
-  console.log('does this do anything?' + { firstCard })
+  const listItem = document.createElement('p')
+  listItem.textContent = { firstCard }
+  console.log(listItem)
+  document.querySelector('.hit-card').appendChild(listItem)
+  console.log('Did the hit button work?')
 }
-
-const dealComputer = () => {
-  const firstCard = cardDeck[0]
-  console.log(firstCard)
-  const takeCard = cardDeck.pop()
-  computerDeck.push(takeCard)
-  document.querySelector('.output').textContent =
-    firstCard.rank +
-    ' of ' +
-    firstCard.suit +
-    ' has a value of ' +
-    firstCard.value
-  console.log('this card ' + { firstCard } + ' was dealt to the computer')
-}
-const main = () => {
-  createDeck()
-  shuffle()
-  dealCard()
-  dealCard()
-  dealComputer()
-  dealComputer()
-  if (document.querySelector('h1.hello-world')) {
-    document.querySelector('h1.hello-world').textContent = 'Blackjack!'
-  }
-}
-
 document.addEventListener('DOMContentLoaded', main)
 // document.addEventListener('DOMContentLoaded', createDeck)
 // document.addEventListener('DOMContentLoaded', shuffle)
-document.querySelector('.hit').addEventListener('click', dealCard)
+document.querySelector('.hit').addEventListener('click', hitCard)
