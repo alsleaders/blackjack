@@ -122,6 +122,12 @@ const standCard = () => {
   })
   console.log(deckTotal)
   document.querySelector('.total').textContent = deckTotal
+  let computerTotal = 0
+  computerDeck.forEach(card => {
+    console.log(card.value)
+    computerTotal += card.value
+  })
+  console.log(computerTotal)
 }
 
 // const playerTotal = sum
