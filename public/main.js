@@ -56,15 +56,14 @@ const dealTwoCards = () => {
   for (let i = 0; i < 2; i++) {
     const firstCard = cardDeck[0]
     console.log(firstCard)
-    const takeCard = cardDeck.pop()
-    playerDeck.push(takeCard)
+    cardDeck.pop(firstCard)
+    playerDeck.push(firstCard)
     const thisIsYourCard =
       firstCard.rank +
       ' of ' +
       firstCard.suit +
       ' has a value of ' +
-      firstCard.value +
-      ' some text that proves this ended'
+      firstCard.value
     document.querySelector('.output').textContent = thisIsYourCard
 
     const listItem = document.createElement('p')
@@ -117,7 +116,21 @@ const hitCard = () => {
   document.querySelector('.hit-card').appendChild(listItem)
   console.log('Did the hit button work?')
 }
+
+const standCard = () => {
+  playerDeck.forEach(playerDeck => console.log(playerDeck.value))
+}
+
+// const playerTotal = sum
+// how to we get value (.value)?  how do we use value?
+// for (let i = 0; i < playerDeck.length; i++) {
+//   let value = playerDeck.value
+//   )
+// sum player hand values
+// compare sum to 21
+//
 document.addEventListener('DOMContentLoaded', main)
 // document.addEventListener('DOMContentLoaded', createDeck)
 // document.addEventListener('DOMContentLoaded', shuffle)
 document.querySelector('.hit').addEventListener('click', hitCard)
+document.querySelector('.stand').addEventListener('click', standCard)
