@@ -54,27 +54,22 @@ const shuffle = () => {
 
 const dealTwoCards = () => {
   for (let i = 0; i < 2; i++) {
-    const firstCard = cardDeck[0]
-    // cardDeck.pop(firstCard)   This code makes it so the display agrees with the first card in the players deck
-    // playerDeck.push(firstCard)  but it makes both dealt cards the same
-
-    // const takeCard = cardDeck.pop()  This code makes the cards in the players deck different
-    // computerDeck.push(takeCard)        but the first card doesn't match the display
-
-    console.log(firstCard)
-    const thisIsYourCard =
-      firstCard.rank +
+    // const firstCard = cardDeck[0]
+    // console.log({ firstCard })
+    const takenCard = cardDeck.pop()
+    console.log(cardDeck)
+    playerDeck.push(takenCard)
+    let thisIsYourCard =
+      takenCard.rank +
       ' of ' +
-      firstCard.suit +
+      takenCard.suit +
       ' has a value of ' +
-      firstCard.value
-    document.querySelector('.output').textContent = thisIsYourCard
-
+      takenCard.value
     const listItem = document.createElement('p')
-    listItem.textContent = { thisIsYourCard }
+    listItem.textContent = thisIsYourCard
     console.log(listItem)
     document.querySelector('.output').appendChild(listItem)
-    console.log('This should have dealt the player this card ' + thisIsYourCard)
+    console.log('This should have dealt the player this card ' + takenCard)
   }
 }
 
@@ -102,27 +97,31 @@ const main = () => {
     document.querySelector('h1.hello-world').textContent = 'Blackjack!'
   }
 }
-
 const hitCard = () => {
-  const firstCard = cardDeck[0]
-  console.log(firstCard)
-  const takeCard = cardDeck.pop()
-  playerDeck.push(takeCard)
-  // document.querySelector('.hit-card').textContent =
-  //   firstCard.rank +
-  //   ' of ' +
-  //   firstCard.suit +
-  //   ' has a value of ' +
-  //   firstCard.value
+  const takenCard = cardDeck.pop()
+  console.log(cardDeck)
+  playerDeck.push(takenCard)
+  let thisIsYourCard =
+    takenCard.rank +
+    ' of ' +
+    takenCard.suit +
+    ' has a value of ' +
+    takenCard.value
   const listItem = document.createElement('p')
-  listItem.textContent = { firstCard }
+  listItem.textContent = thisIsYourCard
   console.log(listItem)
   document.querySelector('.hit-card').appendChild(listItem)
   console.log('Did the hit button work?')
 }
 
 const standCard = () => {
-  playerDeck.forEach(playerDeck => console.log(playerDeck.value))
+  let deckTotal = 0
+  playerDeck.forEach(card => {
+    console.log(card.value)
+    deckTotal += card.value
+  })
+  console.log(deckTotal)
+  document.querySelector('.total').textContent = deckTotal
 }
 
 // const playerTotal = sum
@@ -138,3 +137,7 @@ document.addEventListener('DOMContentLoaded', main)
 // document.addEventListener('DOMContentLoaded', shuffle)
 document.querySelector('.hit').addEventListener('click', hitCard)
 document.querySelector('.stand').addEventListener('click', standCard)
+// This code makes it so the display agrees with the first card in the players deck
+// but it makes both dealt cards the same
+// This code makes the cards in the players deck different
+// but the first card doesn't match the display
