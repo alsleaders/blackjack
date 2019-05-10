@@ -58,26 +58,27 @@ const dealTwoCards = () => {
     console.log(firstCard)
     const takeCard = cardDeck.pop()
     playerDeck.push(takeCard)
-    document.querySelector('.output').textContent =
+    const thisIsYourCard =
       firstCard.rank +
       ' of ' +
       firstCard.suit +
       ' has a value of ' +
       firstCard.value +
       ' some text that proves this ended'
+    document.querySelector('.output').textContent = thisIsYourCard
 
     const listItem = document.createElement('p')
-    listItem.textContent = { firstCard }
+    listItem.textContent = { thisIsYourCard }
     console.log(listItem)
     document.querySelector('.output').appendChild(listItem)
-    console.log('does this do anything?' + { firstCard })
+    console.log('does this do anything?' + thisIsYourCard)
   }
 }
 
 const dealComputerTwoCards = () => {
   for (let i = 0; i < 2; i++) {
     const firstCard = cardDeck[0]
-    console.log(firstCard)
+    console.log({ firstCard })
     const takeCard = cardDeck.pop()
     computerDeck.push(takeCard)
     // document.querySelector('.output').textContent =
@@ -86,7 +87,7 @@ const dealComputerTwoCards = () => {
     //   firstCard.suit +
     //   ' has a value of ' +
     //   firstCard.value
-    console.log('this card ' + { firstCard } + ' was dealt to the computer')
+    console.log('this card ' + firstCard + ' was dealt to the computer')
   }
 }
 const main = () => {
@@ -104,12 +105,12 @@ const hitCard = () => {
   console.log(firstCard)
   const takeCard = cardDeck.pop()
   playerDeck.push(takeCard)
-  document.querySelector('.output').textContent =
-    firstCard.rank +
-    ' of ' +
-    firstCard.suit +
-    ' has a value of ' +
-    firstCard.value
+  // document.querySelector('.hit-card').textContent =
+  //   firstCard.rank +
+  //   ' of ' +
+  //   firstCard.suit +
+  //   ' has a value of ' +
+  //   firstCard.value
   const listItem = document.createElement('p')
   listItem.textContent = { firstCard }
   console.log(listItem)
