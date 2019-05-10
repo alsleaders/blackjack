@@ -55,9 +55,13 @@ const shuffle = () => {
 const dealTwoCards = () => {
   for (let i = 0; i < 2; i++) {
     const firstCard = cardDeck[0]
+    // cardDeck.pop(firstCard)   This code makes it so the display agrees with the first card in the players deck
+    // playerDeck.push(firstCard)  but it makes both dealt cards the same
+
+    // const takeCard = cardDeck.pop()  This code makes the cards in the players deck different
+    // computerDeck.push(takeCard)        but the first card doesn't match the display
+
     console.log(firstCard)
-    cardDeck.pop(firstCard)
-    playerDeck.push(firstCard)
     const thisIsYourCard =
       firstCard.rank +
       ' of ' +
@@ -70,7 +74,7 @@ const dealTwoCards = () => {
     listItem.textContent = { thisIsYourCard }
     console.log(listItem)
     document.querySelector('.output').appendChild(listItem)
-    console.log('does this do anything?' + thisIsYourCard)
+    console.log('This should have dealt the player this card ' + thisIsYourCard)
   }
 }
 
