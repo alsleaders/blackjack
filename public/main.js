@@ -22,10 +22,8 @@ let computerDeck = []
 const createDeck = () => {
   for (let i = 0; i < suits.length; i++) {
     const s = suits[i]
-    console.log({ s }) // should say the suits
     for (let j = 0; j < faces.length; j++) {
       const f = faces[j]
-      console.log({ f }) // should say the face
       const card = {
         rank: faces[j].rank,
         value: faces[j].value,
@@ -33,29 +31,22 @@ const createDeck = () => {
         imageUrl: faces[j].rank + ' of ' + suits[i] + '.png'
       }
       cardDeck.push(card)
-      console.log({ card })
     }
   }
   console.log('All cards pushed to deck')
 }
 const shuffle = () => {
-  // shownDeck = []
   for (let i = cardDeck.length - 1; i > 0; i--) {
-    // select a random card we have not hit yet
     const randomLocation = Math.floor(Math.random() * (i + 1))
-    // swap the current card with the random card
-    let lastCard = cardDeck[i] // define variables for shuffle
+    let lastCard = cardDeck[i]
     cardDeck[i] = cardDeck[randomLocation]
     cardDeck[randomLocation] = lastCard
-    console.log(lastCard)
   }
   console.log('All cards shuffled')
 }
 
 const dealTwoCards = () => {
   for (let i = 0; i < 2; i++) {
-    // const firstCard = cardDeck[0]
-    // console.log({ firstCard })
     const takenCard = cardDeck.pop()
     console.log(cardDeck)
     playerDeck.push(takenCard)
@@ -67,9 +58,7 @@ const dealTwoCards = () => {
       takenCard.value
     const listItem = document.createElement('p')
     listItem.textContent = thisIsYourCard
-    console.log(listItem)
     document.querySelector('.output').appendChild(listItem)
-    console.log('This should have dealt the player this card ' + takenCard)
   }
 }
 
@@ -89,6 +78,8 @@ const dealComputerTwoCards = () => {
   }
 }
 const main = () => {
+  // document.querySelector('.hit-card').remove()
+  // document.querySelector('.output').textContent = ''
   createDeck()
   shuffle()
   dealTwoCards()
@@ -97,6 +88,23 @@ const main = () => {
     document.querySelector('h1.hello-world').textContent = 'Blackjack!'
   }
 }
+
+const reset = () => {
+  document.querySelector('.output').textContent = ''
+  const removeElement = () => {
+    let element = document.getElementById('p')
+    element.parentNode.removeChild('p')
+  }
+  createDeck()
+  shuffle()
+  dealTwoCards()
+  dealComputerTwoCards()
+  removeElement()
+  if (document.querySelector('h1.hello-world')) {
+    document.querySelector('h1.hello-world').textContent = 'Blackjack!'
+  }
+}
+
 const hitCard = () => {
   const takenCard = cardDeck.pop()
   console.log(cardDeck)
@@ -112,6 +120,14 @@ const hitCard = () => {
   console.log(listItem)
   document.querySelector('.hit-card').appendChild(listItem)
   console.log('Did the hit button work?')
+  let deckTotal = 0
+  playerDeck.forEach(card => {
+    console.log(card.value)
+    deckTotal += card.value
+  })
+  if (deckTotal > 21) {
+    document.querySelector('.winner').textContent = 'You lost. The dealer wins!'
+  }
 }
 
 const standCard = () => {
@@ -127,40 +143,34 @@ const standCard = () => {
     console.log(card.value)
     computerTotal += card.value
   })
-
-  console.log(computerTotal)
+  // make this a while loop
   if (computerTotal < 17) {
     const firstCard = cardDeck[0]
     console.log({ firstCard })
     const takeCard = cardDeck.pop()
     computerDeck.push(takeCard)
+    console.log(computerTotal + ' is the computers total')
   }
+
   if (deckTotal < 21 && deckTotal > computerTotal) {
+    console.log('like if you had 20 but the computer had 18')
     document.querySelector('.winner').textContent = 'You win!'
   } else if (deckTotal < 21 && computerTotal > 21) {
+    console.log('this is if the computer busts')
     document.querySelector('.winner').textContent = 'You win!'
-  } else if ((deckTotal = 21 && computerTotal < 21)) {
+  } else if (deckTotal === 21 && computerTotal < 21) {
+    console.log('You got blackjack')
     document.querySelector('.winner').textContent = 'You win!'
   } else if ((deckTotal = computerTotal && !(deckTotal = 21))) {
+    console.log('this is a push')
     document.querySelector('.winner').textContent = 'Push'
   } else {
-    document.querySelector('.winner').textContent = 'The dealer wins!'
+    document.querySelector('.winner').textContent = 'You lost. The dealer wins!'
   }
 }
-// const playerTotal = sum
-// how to we get value (.value)?  how do we use value?
-// for (let i = 0; i < playerDeck.length; i++) {
-//   let value = playerDeck.value
-//   )
-// sum player hand values
-// compare sum to 21
-//
+
 document.addEventListener('DOMContentLoaded', main)
-// document.addEventListener('DOMContentLoaded', createDeck)
-// document.addEventListener('DOMContentLoaded', shuffle)
+document.addEventListener('DOMContentLoaded', shuffle)
 document.querySelector('.hit').addEventListener('click', hitCard)
 document.querySelector('.stand').addEventListener('click', standCard)
-// This code makes it so the display agrees with the first card in the players deck
-// but it makes both dealt cards the same
-// This code makes the cards in the players deck different
-// but the first card doesn't match the display
+document.querySelector('.reset').addEventListener('click', reset)
