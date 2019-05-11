@@ -127,9 +127,25 @@ const standCard = () => {
     console.log(card.value)
     computerTotal += card.value
   })
+  
   console.log(computerTotal)
+  if (computerTotal < 17) {
+    const firstCard = cardDeck[0]
+    console.log({ firstCard })
+    const takeCard = cardDeck.pop()
+    computerDeck.push(takeCard)
+  }
+  if (computerTotal > 21) || (deckTotal > 21) {
+    document.querySelector('.winner').textContent = "Bust!"
+  } else if (deckTotal < 21) && (deckTotal > computerTotal) {
+    document.querySelector('.winner').textContent = 'You win!'
+  } else if 
+  
+  && (deckTotal > computerTotal) {
+    document.querySelector('.winner').textContent = 'Winner'
+  } else if () {
 }
-
+}
 // const playerTotal = sum
 // how to we get value (.value)?  how do we use value?
 // for (let i = 0; i < playerDeck.length; i++) {
