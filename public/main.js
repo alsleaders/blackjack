@@ -1,6 +1,6 @@
 const suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
 const faces = [
-  { rank: 'Ace', value: 11 },
+  { rank: 'ace', value: 11 },
   { rank: '2', value: 2 },
   { rank: '3', value: 3 },
   { rank: '4', value: 4 },
@@ -10,9 +10,9 @@ const faces = [
   { rank: '8', value: 8 },
   { rank: '9', value: 9 },
   { rank: '10', value: 10 },
-  { rank: 'Jack', value: 10 },
-  { rank: 'Queen', value: 10 },
-  { rank: 'King', value: 10 }
+  { rank: 'jack', value: 10 },
+  { rank: 'queen', value: 10 },
+  { rank: 'king', value: 10 }
 ]
 
 let cardDeck = []
@@ -27,8 +27,8 @@ const createDeck = () => {
       const card = {
         rank: faces[j].rank,
         value: faces[j].value,
-        suit: suits[i],
-        imageUrl: faces[j].rank + ' of ' + suits[i] + '.png'
+        suit: suits[i]
+        // imageUrl: './images/${faces[j].rank}_of_${suits[i]}.svg'
       }
       cardDeck.push(card)
     }
@@ -109,13 +109,8 @@ const hitCard = () => {
   const takenCard = cardDeck.pop()
   console.log(cardDeck)
   playerDeck.push(takenCard)
-  let thisIsYourCard =
-    takenCard.rank +
-    ' of ' +
-    takenCard.suit +
-    ' has a value of ' +
-    takenCard.value
-  const listItem = document.createElement('p')
+  let thisIsYourCard = takenCard.imageUrl
+  const listItem = document.createElement('img')
   listItem.textContent = thisIsYourCard
   console.log(listItem)
   document.querySelector('.hit-card').appendChild(listItem)
@@ -143,25 +138,26 @@ const standCard = () => {
     console.log(card.value)
     computerTotal += card.value
   })
+
   // make this a while loop
-  if (computerTotal < 17) {
-    const firstCard = cardDeck[0]
-    console.log({ firstCard })
+  while (computerTotal <= 17) {
+    const nextCard = cardDeck[0]
+    console.log({ nextCard })
     const takeCard = cardDeck.pop()
     computerDeck.push(takeCard)
-    console.log(computerTotal + ' is the computers total')
+    computerTotal += console.log(computerTotal + ' is the computers total')
   }
 
-  if (deckTotal < 21 && deckTotal > computerTotal) {
+  if (deckTotal <= 21 && deckTotal > computerTotal) {
     console.log('like if you had 20 but the computer had 18')
     document.querySelector('.winner').textContent = 'You win!'
-  } else if (deckTotal < 21 && computerTotal > 21) {
+  } else if (deckTotal <= 21 && computerTotal > 21) {
     console.log('this is if the computer busts')
     document.querySelector('.winner').textContent = 'You win!'
   } else if (deckTotal === 21 && computerTotal < 21) {
     console.log('You got blackjack')
     document.querySelector('.winner').textContent = 'You win!'
-  } else if ((deckTotal = computerTotal && !(deckTotal = 21))) {
+  } else if ((deckTotal = computerTotal && deckTotal < 21)) {
     console.log('this is a push')
     document.querySelector('.winner').textContent = 'Push'
   } else {
