@@ -18,6 +18,8 @@ const faces = [
 let cardDeck = []
 let playerDeck = []
 let computerDeck = []
+let deckTotal = 0
+let computerTotal = 0
 
 const createDeck = () => {
   for (let i = 0; i < suits.length; i++) {
@@ -105,22 +107,6 @@ const main = () => {
 
 const reset = () => {
   window.location.reload(true)
-  // document.querySelector('.output').textContent = ''
-  // // const removeElement = () => {
-  // //   let element = document.getElementById('ul')
-  // //   element.removeChild('expanding-list')
-  // document.querySelector('.computer-output').textContent = ''
-  // document.querySelector('.hit').disabled = false
-  // document.querySelector('.stand').disabled = false
-  // computerTotal = 0
-  // createDeck()
-  // shuffle()
-  // dealTwoCards()
-  // dealComputerTwoCards()
-  // // removeElement()
-  // if (document.querySelector('h1.hello-world')) {
-  //   document.querySelector('h1.hello-world').textContent = 'Blackjack!'
-  // }
 }
 
 const hitCard = () => {
@@ -144,7 +130,7 @@ const hitCard = () => {
     console.log(card.value)
     deckTotal += card.value
   })
-  if (deckTotal == 21) {
+  if (deckTotal === 21) {
     document.querySelector('.winner').textContent = 'You got Blackjack!'
     document.querySelector('.hit').disabled = true
     document.querySelector('.stand').disabled = true
@@ -157,6 +143,29 @@ const hitCard = () => {
 
 const standCard = () => {
   document.querySelector('.hit').disabled = true
+
+  // adds the players cards up
+  playerDeck.forEach(card => {
+    console.log(card.value)
+    deckTotal += card.value
+  })
+  console.log(deckTotal)
+  document.querySelector('.total').textContent = deckTotal // perfect this far in this function
+
+  // adds the computers cards up
+  computerDeck.forEach(card => {
+    computerTotal += card.value
+    console.log(computerTotal + ' is the computers total right now')
+    // computerTotal += takeCard.value
+  })
+  // while loop for computer hitting
+  while (computerTotal < 17) {
+    const takeCard = cardDeck.pop()
+    computerDeck.push(takeCard)
+    computerTotal += takeCard.value
+    console.log(computerTotal + ' is the computers total')
+  }
+  // shows the computers hand
   for (let i = 0; i < computerDeck.length; i++) {
     let thisIsYourCard =
       computerDeck[i].rank +
@@ -168,31 +177,7 @@ const standCard = () => {
     listItem.textContent = thisIsYourCard
     document.querySelector('.computer-output').appendChild(listItem)
   }
-
-  let deckTotal = 0
-  playerDeck.forEach(card => {
-    console.log(card.value)
-    deckTotal += card.value
-  })
-  console.log(deckTotal)
-  document.querySelector('.total').textContent = deckTotal // perfect this far in this function
-
-  let computerTotal = 0
-  computerDeck.forEach(card => {
-    computerTotal += card.value
-    console.log(computerTotal + ' is the computers total right now')
-  })
-  // while (computerTotal < 17) {
-  //   const firstCard = cardDeck[0]
-  //   console.log({ firstCard })
-  //   const takeCard = cardDeck.pop()
-  //   computerDeck.push(takeCard)
-  //   computerTotal += card.value
-  //
-  console.log(computerTotal + ' is the computers total')
   document.querySelector('.computer-total').textContent = computerTotal
-
-  // display computer's hand
 
   if (deckTotal < 21 && deckTotal > computerTotal) {
     console.log('like if you had 20 but the computer had 18')
