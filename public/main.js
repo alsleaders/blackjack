@@ -60,6 +60,19 @@ const dealTwoCards = () => {
     listItem.textContent = thisIsYourCard
     document.querySelector('.output').appendChild(listItem)
   }
+  let deckTotal = 0
+  playerDeck.forEach(card => {
+    console.log(card.value)
+    deckTotal += card.value
+  })
+  if (deckTotal === 21) {
+    document.querySelector('.winner').textContent = 'You got Blackjack!'
+    document.querySelector('.hit').disabled = true
+    document.querySelector('.stand').disabled = true
+  }
+  if (deckTotal > 21) {
+    document.querySelector('.winner').textContent = 'You lost. The dealer wins!'
+  }
 }
 
 const dealComputerTwoCards = () => {
@@ -68,12 +81,6 @@ const dealComputerTwoCards = () => {
     console.log({ firstCard })
     const takeCard = cardDeck.pop()
     computerDeck.push(takeCard)
-    // document.querySelector('.output').textContent =
-    //   firstCard.rank +
-    //   ' of ' +
-    //   firstCard.suit +
-    //   ' has a value of ' +
-    //   firstCard.value
     console.log('this card ' + firstCard + ' was dealt to the computer')
   }
 }
@@ -125,8 +132,10 @@ const hitCard = () => {
     console.log(card.value)
     deckTotal += card.value
   })
-  if (deckTotal === 21) {
+  if (deckTotal == 21) {
     document.querySelector('.winner').textContent = 'You got Blackjack!'
+    document.querySelector('.hit').disabled = true
+    document.querySelector('.stand').disabled = true
   }
   if (deckTotal > 21) {
     document.querySelector('.winner').textContent = 'You lost. The dealer wins!'
@@ -141,9 +150,9 @@ const standCard = () => {
   })
   console.log(deckTotal)
   document.querySelector('.total').textContent = deckTotal
+
   let computerTotal = 0
   computerDeck.forEach(card => {
-    console.log(card.value)
     computerTotal += card.value
     while (computerTotal < 17) {
       const firstCard = cardDeck[0]
@@ -160,13 +169,16 @@ const standCard = () => {
   if (deckTotal < 21 && deckTotal > computerTotal) {
     console.log('like if you had 20 but the computer had 18')
     document.querySelector('.winner').textContent = 'You win!'
-  } else if (deckTotal < 21 && computerTotal > 21) {
+  }
+  if (deckTotal < 21 && computerTotal > 21) {
     console.log('this is if the computer busts')
     document.querySelector('.winner').textContent = 'You win!'
-  } else if (deckTotal === 21 && computerTotal < 21) {
+  }
+  if (deckTotal === 21 && computerTotal < 21) {
     console.log('You got blackjack')
     document.querySelector('.winner').textContent = 'You win!'
-  } else if ((deckTotal = computerTotal && !(deckTotal = 21))) {
+  }
+  if ((deckTotal = computerTotal && !(deckTotal = 21))) {
     console.log('this is a push')
     document.querySelector('.winner').textContent = 'Push'
   } else {
