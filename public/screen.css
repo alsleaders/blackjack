@@ -1,5 +1,5 @@
 :root {
-  font: 16px / 1 sans-serif;
+  font: 32px / 1 sans-serif;
 }
 
 html {
@@ -8,30 +8,47 @@ html {
 }
 
 body {
-  margin: 5%;
+  margin: 10%;
   background: mediumseagreen;
   border-radius: 2rem;
+  font-family: 'Montserrat', sans-serif;
 }
 
-.centered-buttons {
+h1 {
+  font-size: 45pt;
+}
+.row-buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
 .hit {
   background-color: red;
+  font-size: 40pt;
   font-weight: bolder;
   padding: 0.5rem;
-  margin: 0.25rem;
+  margin: 0.5rem;
+  border-radius: 1rem;
 }
 
 .stand {
   background-color: red;
+  font-size: 40pt;
   font-weight: bolder;
   padding: 0.5rem;
-  margin: 0.25rem;
+  margin: 0.5rem;
+  border-radius: 1rem;
+}
+
+.reset {
+  background-color: red;
+  font-size: 40pt;
+  font-weight: bolder;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 1rem;
 }
 
 .be-centered {
@@ -39,6 +56,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.winner {
+  font-weight: bolder;
+  font-size: 42pt;
 }
 
 ul {

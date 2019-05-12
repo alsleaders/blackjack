@@ -6,27 +6,30 @@
     <title>Blackjack</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/screen.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <section class="centered-buttons">
-      <h1 class="hello-world"></h1>
-      <button class="hit">Hit</button>
-      <button class="stand">Stand</button>
-    </section>
     <section class="be-centered">
+      <h1 class="hello-world"></h1>
+      <!-- <p>This is your total <span class="total"></span></p> -->
+      <p class="computer-card-text"><span></span></p>
+      <p><span class="computer-output"></span></p>
+      <!-- <p>This is the dealer's total <span class="computer-total"></span></p> -->
       <p>These are your cards</p>
       <p><span class="output"></span></p>
       <p><span class="hit-card"></span></p>
-      <p>This is your total <span class="total"></span></p>
-      <p>These are the dealer's cards</p>
-      <p><span class="computer-output"></span></p>
-      <p>This is the dealer's total <span class="computer-total"></span></p>
-      <p></p>
-      <p>
-        This is your result <br />
-        <span class="winner"></span>
+      <p class="winner">
+        <br />
+        <span></span>
       </p>
-      <button class="reset">New Game</button>
+      <section class="row-buttons">
+        <button class="hit">Hit</button>
+        <button class="stand">Stand</button>
+        <button class="reset">New Game</button>
+      </section>
     </section>
     <script src="/main.js" charset="utf-8"></script>
   </body>

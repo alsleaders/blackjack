@@ -81,15 +81,6 @@ const dealComputerTwoCards = () => {
     const takeCard = cardDeck.pop()
     computerDeck.push(takeCard)
     console.log('this card ' + { takeCard } + ' was dealt to the computer')
-    // let thisIsYourCard =
-    //   takeCard.rank +
-    //   ' of ' +
-    //   takeCard.suit +
-    //   ' has a value of ' +
-    //   takeCard.value
-    // const listItem = document.createElement('p')
-    // listItem.textContent = thisIsYourCard
-    // document.querySelector('.computer-output').appendChild(listItem)
   }
 }
 const main = () => {
@@ -152,7 +143,7 @@ const standCard = () => {
     deckTotal += card.value
   })
   console.log(deckTotal)
-  document.querySelector('.total').textContent = deckTotal // perfect this far in this function
+  // document.querySelector('.total').textContent = deckTotal // perfect this far in this function
 
   // adds the computers cards up
   computerDeck.forEach(card => {
@@ -168,32 +159,54 @@ const standCard = () => {
     console.log(computerTotal + ' is the computers total')
   }
   // shows the computers hand
+
+  // const thisIsTheComputersCard = document.createElement('img')
+  // thisIsTheComputersCard.src =
+  //   '/images/' +
+  //   computerDeck.rank +
+  //   '_' +
+  //   'of' +
+  //   '_' +
+  //   computerDeck.suit +
+  //   '.svg'
+  // document
+  //   .querySelector('.computer-output')
+  //   .appendChild(thisIsTheComputersCard)
+
+  // let thisIsYourCard =
+  //   computerDeck[i].rank +
+  //   ' of ' +
+  //   computerDeck[i].suit +
+  //   ' has a value of ' +
+  //   computerDeck[i].value
+  // const listItem = document.createElement('p')
+  // listItem.textContent = thisIsYourCard
+  // document.querySelector('.computer-output').appendChild(listItem)
+}
+// document.querySelector('.computer-total').textContent = computerTotal
+
+const displayComputerHand = () => {
   for (let i = 0; i < computerDeck.length; i++) {
-    const thisIsTheComputersCard = document.createElement('img')
-    thisIsTheComputersCard.src =
+    const displayComputersCard = document.createElement('img')
+    let expandingList = document.createElement('img', { is: 'expanding-list' })
+    displayComputersCard.src =
       '/images/' +
-      computerDeck.rank +
+      computerDeck[i].rank +
       '_' +
       'of' +
       '_' +
-      computerDeck.suit +
+      computerDeck[i].suit +
       '.svg'
-    document
-      .querySelector('.computer-output')
-      .appendChild(thisIsTheComputersCard)
-
-    // let thisIsYourCard =
-    //   computerDeck[i].rank +
-    //   ' of ' +
-    //   computerDeck[i].suit +
-    //   ' has a value of ' +
-    //   computerDeck[i].value
-    // const listItem = document.createElement('p')
-    // listItem.textContent = thisIsYourCard
-    // document.querySelector('.computer-output').appendChild(listItem)
+    document.querySelector('.computer-output').appendChild(displayComputersCard)
+    expandingList.textContent = displayComputersCard
+    document.querySelector('.computer-output').appendChild(expandingList)
   }
-  document.querySelector('.computer-total').textContent = computerTotal
+  document.querySelector('.computer-card-text').textContent =
+    "These are the dealer's cards"
+}
 
+const determineTheWinner = () => {
+  document.querySelector('.winner').textContent = 'This is your result'
   if (deckTotal < 21 && deckTotal > computerTotal) {
     console.log('like if you had 20 but the computer had 18')
     document.querySelector('.winner').textContent = 'You win!'
@@ -217,3 +230,5 @@ document.addEventListener('DOMContentLoaded', shuffle)
 document.querySelector('.hit').addEventListener('click', hitCard)
 document.querySelector('.stand').addEventListener('click', standCard)
 document.querySelector('.reset').addEventListener('click', reset)
+document.querySelector('.stand').addEventListener('click', displayComputerHand)
+document.querySelector('.stand').addEventListener('click', determineTheWinner)
