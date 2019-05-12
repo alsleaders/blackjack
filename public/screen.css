@@ -17,6 +17,11 @@ body {
 h1 {
   font-size: 45pt;
 }
+
+.needs-margin {
+  margin: 10% 0 0 0;
+}
+
 .row-buttons {
   display: flex;
   flex-direction: row;
@@ -61,6 +66,7 @@ h1 {
 .winner {
   font-weight: bolder;
   font-size: 42pt;
+  margin: 0 0 2rem 0;
 }
 
 ul {

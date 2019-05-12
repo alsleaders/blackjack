@@ -47,10 +47,7 @@ const shuffle = () => {
   }
   console.log('All cards shuffled')
 }
-// const createCardImage = () => {
-//     const createCardFront = document.createElement('img')
-//       createPlayerCard.src = '/images/' +
-// }
+
 const dealTwoCards = () => {
   for (let i = 0; i < 2; i++) {
     const takenCard = cardDeck.pop()
@@ -84,8 +81,6 @@ const dealComputerTwoCards = () => {
   }
 }
 const main = () => {
-  // document.querySelector('.hit-card').remove()
-  // document.querySelector('.output').textContent = ''
   createDeck()
   shuffle()
   dealTwoCards()
@@ -101,7 +96,6 @@ const reset = () => {
 
 const hitCard = () => {
   const takenCard = cardDeck.pop()
-  console.log(cardDeck)
   playerDeck.push(takenCard)
 
   const thisIsYourCard = document.createElement('img')
@@ -111,7 +105,6 @@ const hitCard = () => {
   let expandingList = document.createElement('img', { is: 'expanding-list' })
 
   expandingList.textContent = thisIsYourCard
-  // console.log(listItem)
   document.querySelector('.hit-card').appendChild(expandingList)
   console.log('Did the hit button work?')
   let deckTotal = 0
@@ -124,12 +117,14 @@ const hitCard = () => {
       'You win! You got Blackjack!'
     document.querySelector('.hit').disabled = true
     document.querySelector('.stand').disabled = true
+    displayComputerHand()
   }
   if (deckTotal > 21) {
     document.querySelector('.winner').textContent =
       'You busted. The dealer wins!'
     document.querySelector('.hit').disabled = true
     document.querySelector('.stand').disabled = true
+    displayComputerHand()
   }
 }
 
@@ -148,8 +143,6 @@ const standCard = () => {
   // adds the computers cards up
   computerDeck.forEach(card => {
     computerTotal += card.value
-    console.log(computerTotal + ' is the computers total right now')
-    // computerTotal += takeCard.value
   })
   // while loop for computer hitting
   while (computerTotal < 17) {
@@ -158,32 +151,7 @@ const standCard = () => {
     computerTotal += takeCard.value
     console.log(computerTotal + ' is the computers total')
   }
-  // shows the computers hand
-
-  // const thisIsTheComputersCard = document.createElement('img')
-  // thisIsTheComputersCard.src =
-  //   '/images/' +
-  //   computerDeck.rank +
-  //   '_' +
-  //   'of' +
-  //   '_' +
-  //   computerDeck.suit +
-  //   '.svg'
-  // document
-  //   .querySelector('.computer-output')
-  //   .appendChild(thisIsTheComputersCard)
-
-  // let thisIsYourCard =
-  //   computerDeck[i].rank +
-  //   ' of ' +
-  //   computerDeck[i].suit +
-  //   ' has a value of ' +
-  //   computerDeck[i].value
-  // const listItem = document.createElement('p')
-  // listItem.textContent = thisIsYourCard
-  // document.querySelector('.computer-output').appendChild(listItem)
 }
-// document.querySelector('.computer-total').textContent = computerTotal
 
 const displayComputerHand = () => {
   for (let i = 0; i < computerDeck.length; i++) {
