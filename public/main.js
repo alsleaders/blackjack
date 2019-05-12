@@ -56,11 +56,10 @@ const dealTwoCards = () => {
     const takenCard = cardDeck.pop()
     console.log(cardDeck)
     playerDeck.push(takenCard)
-    let thisIsYourCard =
-      '/images/' + takenCard.rank + '_ of_ ' + takenCard.suit + '.svg'
-    const listItem = document.createElement('p')
-    listItem.textContent = thisIsYourCard
-    document.querySelector('.output').appendChild(listItem)
+    const thisIsYourCard = document.createElement('img')
+    thisIsYourCard.src =
+      '/images/' + takenCard.rank + '_' + 'of' + '_' + takenCard.suit + '.svg'
+    document.querySelector('.output').appendChild(thisIsYourCard)
   }
   let deckTotal = 0
   playerDeck.forEach(card => {
@@ -113,14 +112,13 @@ const hitCard = () => {
   const takenCard = cardDeck.pop()
   console.log(cardDeck)
   playerDeck.push(takenCard)
-  let thisIsYourCard =
-    takenCard.rank +
-    ' of ' +
-    takenCard.suit +
-    ' has a value of ' +
-    takenCard.value
-  let expandingList = document.createElement('ul', { is: 'expanding-list' })
-  // const listItem = document.createElement('p')
+
+  const thisIsYourCard = document.createElement('img')
+  thisIsYourCard.src =
+    '/images/' + takenCard.rank + '_' + 'of' + '_' + takenCard.suit + '.svg'
+  document.querySelector('.output').appendChild(thisIsYourCard)
+  let expandingList = document.createElement('img', { is: 'expanding-list' })
+
   expandingList.textContent = thisIsYourCard
   // console.log(listItem)
   document.querySelector('.hit-card').appendChild(expandingList)
@@ -131,13 +129,16 @@ const hitCard = () => {
     deckTotal += card.value
   })
   if (deckTotal === 21) {
-    document.querySelector('.winner').textContent = 'You got Blackjack!'
+    document.querySelector('.winner').textContent =
+      'You win! You got Blackjack!'
     document.querySelector('.hit').disabled = true
     document.querySelector('.stand').disabled = true
   }
   if (deckTotal > 21) {
     document.querySelector('.winner').textContent =
       'You busted. The dealer wins!'
+    document.querySelector('.hit').disabled = true
+    document.querySelector('.stand').disabled = true
   }
 }
 
@@ -168,15 +169,28 @@ const standCard = () => {
   }
   // shows the computers hand
   for (let i = 0; i < computerDeck.length; i++) {
-    let thisIsYourCard =
-      computerDeck[i].rank +
-      ' of ' +
-      computerDeck[i].suit +
-      ' has a value of ' +
-      computerDeck[i].value
-    const listItem = document.createElement('p')
-    listItem.textContent = thisIsYourCard
-    document.querySelector('.computer-output').appendChild(listItem)
+    const thisIsTheComputersCard = document.createElement('img')
+    thisIsTheComputersCard.src =
+      '/images/' +
+      computerDeck.rank +
+      '_' +
+      'of' +
+      '_' +
+      computerDeck.suit +
+      '.svg'
+    document
+      .querySelector('.computer-output')
+      .appendChild(thisIsTheComputersCard)
+
+    // let thisIsYourCard =
+    //   computerDeck[i].rank +
+    //   ' of ' +
+    //   computerDeck[i].suit +
+    //   ' has a value of ' +
+    //   computerDeck[i].value
+    // const listItem = document.createElement('p')
+    // listItem.textContent = thisIsYourCard
+    // document.querySelector('.computer-output').appendChild(listItem)
   }
   document.querySelector('.computer-total').textContent = computerTotal
 
