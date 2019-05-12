@@ -1,4 +1,4 @@
-const suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
+const suits = ['hearts', 'diamonds', 'spades', 'clubs']
 const faces = [
   { rank: 'Ace', value: 11 },
   { rank: '2', value: 2 },
@@ -30,7 +30,8 @@ const createDeck = () => {
         rank: faces[j].rank,
         value: faces[j].value,
         suit: suits[i],
-        imageUrl: faces[j].rank + ' of ' + suits[i] + '.png'
+        imageUrl: `/images/${faces.rank}_of_${suits}.svg`
+        // /images/faces[j].rank + '_of_' + suits[i] + '.svg'
       }
       cardDeck.push(card)
     }
@@ -46,18 +47,17 @@ const shuffle = () => {
   }
   console.log('All cards shuffled')
 }
-
+// const createCardImage = () => {
+//     const createCardFront = document.createElement('img')
+//       createPlayerCard.src = '/images/' +
+// }
 const dealTwoCards = () => {
   for (let i = 0; i < 2; i++) {
     const takenCard = cardDeck.pop()
     console.log(cardDeck)
     playerDeck.push(takenCard)
     let thisIsYourCard =
-      takenCard.rank +
-      ' of ' +
-      takenCard.suit +
-      ' has a value of ' +
-      takenCard.value
+      '/images/' + takenCard.rank + '_ of_ ' + takenCard.suit + '.svg'
     const listItem = document.createElement('p')
     listItem.textContent = thisIsYourCard
     document.querySelector('.output').appendChild(listItem)
@@ -143,6 +143,7 @@ const hitCard = () => {
 
 const standCard = () => {
   document.querySelector('.hit').disabled = true
+  document.querySelector('.stand').disabled = true
 
   // adds the players cards up
   playerDeck.forEach(card => {
