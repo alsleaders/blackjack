@@ -80,15 +80,6 @@ const dealComputerTwoCards = () => {
     console.log('this card ' + { takeCard } + ' was dealt to the computer')
   }
 }
-const main = () => {
-  createDeck()
-  shuffle()
-  dealTwoCards()
-  dealComputerTwoCards()
-  if (document.querySelector('h1.hello-world')) {
-    document.querySelector('h1.hello-world').textContent = 'Blackjack!'
-  }
-}
 
 const reset = () => {
   window.location.reload(true)
@@ -153,8 +144,39 @@ const standCard = () => {
   }
 }
 
+const displayComputerFirstCard = () => {
+  const displayComputersCard = document.createElement('img')
+  let expandingList = document.createElement('img', { is: 'expanding-list' })
+  displayComputersCard.src =
+    '/images/' +
+    computerDeck[0].rank +
+    '_' +
+    'of' +
+    '_' +
+    computerDeck[0].suit +
+    '.svg'
+  document.querySelector('.computer-output').appendChild(displayComputersCard)
+  expandingList.textContent = displayComputersCard
+  document.querySelector('.computer-output').appendChild(expandingList)
+}
+document.querySelector('.computer-card-text').textContent =
+  "These are the dealer's cards"
+
 const displayComputerHand = () => {
-  for (let i = 0; i < computerDeck.length; i++) {
+  const displayComputersCard = document.createElement('img')
+  let expandingList = document.createElement('img', { is: 'expanding-list' })
+  displayComputersCard.src =
+    '/images/' +
+    computerDeck[0].rank +
+    '_' +
+    'of' +
+    '_' +
+    computerDeck[0].suit +
+    '.svg'
+  document.querySelector('.computer-output').appendChild(displayComputersCard)
+  expandingList.textContent = displayComputersCard
+  document.querySelector('.computer-output').appendChild(expandingList)
+  for (let i = 1; i < computerDeck.length; i++) {
     const displayComputersCard = document.createElement('img')
     let expandingList = document.createElement('img', { is: 'expanding-list' })
     displayComputersCard.src =
@@ -169,8 +191,6 @@ const displayComputerHand = () => {
     expandingList.textContent = displayComputersCard
     document.querySelector('.computer-output').appendChild(expandingList)
   }
-  document.querySelector('.computer-card-text').textContent =
-    "These are the dealer's cards"
 }
 
 const determineTheWinner = () => {
@@ -193,6 +213,16 @@ const determineTheWinner = () => {
   }
 }
 
+const main = () => {
+  createDeck()
+  shuffle()
+  dealTwoCards()
+  dealComputerTwoCards()
+  displayComputerFirstCard()
+  if (document.querySelector('h1.hello-world')) {
+    document.querySelector('h1.hello-world').textContent = 'Blackjack!'
+  }
+}
 document.addEventListener('DOMContentLoaded', main)
 document.addEventListener('DOMContentLoaded', shuffle)
 document.querySelector('.hit').addEventListener('click', hitCard)
