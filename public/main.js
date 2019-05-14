@@ -22,6 +22,7 @@ let deckTotal = 0
 let computerTotal = 0
 
 const createDeck = () => {
+  cardDeck = []
   for (let i = 0; i < suits.length; i++) {
     const s = suits[i]
     for (let j = 0; j < faces.length; j++) {
@@ -30,8 +31,7 @@ const createDeck = () => {
         rank: faces[j].rank,
         value: faces[j].value,
         suit: suits[i],
-        imageUrl: `/images/${faces.rank}_of_${suits}.svg`
-        // /images/faces[j].rank + '_of_' + suits[i] + '.svg'
+        imageUrl: '/images/' + f.rank + '_' + 'of' + '_' + s + '.svg'
       }
       cardDeck.push(card)
     }
@@ -81,8 +81,21 @@ const dealComputerTwoCards = () => {
   }
 }
 
+const disableButtons = status => {
+  document.querySelector('.hit').disabled = status
+  document.querySelector('.stand').disabled = status
+}
 const reset = () => {
-  window.location.reload(true)
+  cardDeck = []
+  playerDeck = []
+  document.querySelector('.output').textContent = ''
+  computerDeck = []
+  document.querySelector('.computer-output').textContent = ''
+  deckTotal = 0
+  computerTotal = 0
+  document.querySelector('.winner').textContent = ''
+  disableButtons(false)
+  main()
 }
 
 const hitCard = () => {
@@ -90,8 +103,8 @@ const hitCard = () => {
   playerDeck.push(takenCard)
 
   const thisIsYourCard = document.createElement('img')
-  thisIsYourCard.src =
-    '/images/' + takenCard.rank + '_' + 'of' + '_' + takenCard.suit + '.svg'
+  thisIsYourCard.src = takenCard.imageUrl
+  // '/images/' + takenCard.rank + '_' + 'of' + '_' + takenCard.suit + '.svg'
   document.querySelector('.output').appendChild(thisIsYourCard)
   let expandingList = document.createElement('img', { is: 'expanding-list' })
 
@@ -106,22 +119,19 @@ const hitCard = () => {
   if (deckTotal === 21) {
     document.querySelector('.winner').textContent =
       'You win! You got Blackjack!'
-    document.querySelector('.hit').disabled = true
-    document.querySelector('.stand').disabled = true
+    disableButtons(true)
     displayComputerHand()
   }
   if (deckTotal > 21) {
     document.querySelector('.winner').textContent =
       'You busted. The dealer wins!'
-    document.querySelector('.hit').disabled = true
-    document.querySelector('.stand').disabled = true
+    disableButtons(true)
     displayComputerHand()
   }
 }
 
 const standCard = () => {
-  document.querySelector('.hit').disabled = true
-  document.querySelector('.stand').disabled = true
+  disableButtons(true)
 
   // adds the players cards up
   playerDeck.forEach(card => {
@@ -147,14 +157,7 @@ const standCard = () => {
 const displayComputerFirstCard = () => {
   const displayComputersCard = document.createElement('img')
   let expandingList = document.createElement('img', { is: 'expanding-list' })
-  displayComputersCard.src =
-    '/images/' +
-    computerDeck[0].rank +
-    '_' +
-    'of' +
-    '_' +
-    computerDeck[0].suit +
-    '.svg'
+  displayComputersCard.src = computerDeck[0].imageUrl
   document.querySelector('.computer-output').appendChild(displayComputersCard)
   expandingList.textContent = displayComputersCard
   document.querySelector('.computer-output').appendChild(expandingList)
@@ -165,28 +168,13 @@ document.querySelector('.computer-card-text').textContent =
 const displayComputerHand = () => {
   const displayComputersCard = document.createElement('img')
   let expandingList = document.createElement('img', { is: 'expanding-list' })
-  displayComputersCard.src =
-    '/images/' +
-    computerDeck[0].rank +
-    '_' +
-    'of' +
-    '_' +
-    computerDeck[0].suit +
-    '.svg'
   document.querySelector('.computer-output').appendChild(displayComputersCard)
   expandingList.textContent = displayComputersCard
   document.querySelector('.computer-output').appendChild(expandingList)
   for (let i = 1; i < computerDeck.length; i++) {
     const displayComputersCard = document.createElement('img')
     let expandingList = document.createElement('img', { is: 'expanding-list' })
-    displayComputersCard.src =
-      '/images/' +
-      computerDeck[i].rank +
-      '_' +
-      'of' +
-      '_' +
-      computerDeck[i].suit +
-      '.svg'
+    displayComputersCard.src = computerDeck[i].imageUrl
     document.querySelector('.computer-output').appendChild(displayComputersCard)
     expandingList.textContent = displayComputersCard
     document.querySelector('.computer-output').appendChild(expandingList)
@@ -196,17 +184,13 @@ const displayComputerHand = () => {
 const determineTheWinner = () => {
   document.querySelector('.winner').textContent = 'This is your result'
   if (deckTotal < 21 && deckTotal > computerTotal) {
-    console.log('like if you had 20 but the computer had 18')
     document.querySelector('.winner').textContent = 'You win!'
   } else if (deckTotal < 21 && computerTotal > 21) {
-    console.log('this is if the computer busts')
     document.querySelector('.winner').textContent =
       'The dealer busted. You win!'
   } else if (deckTotal === 21 && computerTotal < 21) {
-    console.log('You got blackjack')
     document.querySelector('.winner').textContent = 'You win! You got blackjack'
   } else if (deckTotal === computerTotal && deckTotal < 21) {
-    console.log('this is a push')
     document.querySelector('.winner').textContent = 'Push'
   } else {
     document.querySelector('.winner').textContent = 'You lost. The dealer wins!'
